@@ -51,6 +51,9 @@ Within this database, there are seven core tables which store data on books, aut
   - `value` stores the corresponding value.
   - It has no Foreign Key relationships with the other tables.
 
+ ERD DIAGRAM
+    <img width="963" height="942" alt="image" src="https://github.com/user-attachments/assets/7499871c-f0cf-4539-a063-c72abcae6f19" />
+
 
 Relationships
 - AUTHOR → BOOK_AUTHORS: One-to-Many
