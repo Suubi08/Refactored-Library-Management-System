@@ -79,3 +79,32 @@ The database schema does not directly enforce some rules. These are handled by a
 - Phone number validation.
 
 ## TASK 2 Query responsibilities
+The `database/query/` directory contains modules responsible for retrieving,
+storing, and modifying database-related data. However, some modules also
+contain application and business logic.
+
+| File | Main Responsibility |
+|---|---|
+| `book.py` | Book data retrieval and availability checking |
+| `borrower.py` | Borrower retrieval, searching, creation, and validation |
+| `loan.py` | Loan retrieval and checkout/check-in operations with embedded business logic |
+| `fine.py` | Fine retrieval and payment/update operations with embedded business logic |
+| `author.py` | Author retrieval by ID |
+| `conf.py` | Application date and initialization state management, including triggering fine updates |
+| `metadata.py` | Key-value application metadata retrieval and storage |
+| `query.py` | Low-level SQLite query execution, connection handling, commits, and rollbacks |
+
+### Key Observation
+
+The query modules are not purely persistence-focused.
+
+Several modules contain business or application logic in addition to database
+access. In particular:
+
+- `borrower.py` performs SSN and phone validation and duplicate SSN checking.
+- `loan.py` contains loan operation rules.
+- `fine.py` contains fine calculation and payment-related rules.
+- `conf.py` triggers fine updates when the application date is reset.
+
+This creates coupling between **business rules and database access**, which is
+important for the later Clean Architecture refactoring.
