@@ -52,13 +52,6 @@ Within this database, there are seven core tables which store data on books, aut
   - It has no Foreign Key relationships with the other tables.
 
 
-
-## Entity Relationship Diagram
-
-```mermaid
-erDiagram
-    ...
-
 Relationships
 - AUTHOR → BOOK_AUTHORS: One-to-Many
 - BOOK → BOOK_AUTHORS: One-to-Many
@@ -151,7 +144,6 @@ coupled to database details.
 - **Business Logic** — Mainly applies rules, decisions, or calculations.
 - **Both** — Performs database access and also applies business logic.
 
----
 
 ## 3.1 `database/query/book.py`
 
