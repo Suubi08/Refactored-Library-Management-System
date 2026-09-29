@@ -20,9 +20,8 @@ Impact statement
 
 Because the UI calls db.* in 9 files, any change to the database interface breaks book_detail, borrower_detail, create_borrower, settings, time_travel, home, init_prompt, and both search screens at once. The presentation layer is effectively a client of the SQL layer.
 
-Suggested remedy (to close the section)
+Suggested remedy
 
 Introduce a service/use-case layer (LoanService, BorrowerService, FineService) that uses repository interfaces. Move rules like the loan limit, SSN and phone validation, and fine calculation into it. The UI then depends only on the services.
 
-Testing note for Part B: the zip contains no test files and no pytest in pyproject.toml/requirements.txt, so the current test status is "no automated tests". The layering problems above are the reason: rules can't be tested without a real SQLite database.
 
