@@ -1,7 +1,5 @@
-Where clean architecture is violated
-The dependency rule is violated. Every screen and modal does import database as db and calls it directly (book_detail, borrower_detail, create_borrower, settings, time_travel, init_prompt, home, book_search, borrower_search).
-From book_detail: Import database as db, calls db.get, db.create, db.checkin instead of depending on abstraction. There’s no service layer between the UI and data. The UI depends on the Database (SQLite).
 
+The dependency rule is violated. Every screen and modal does import database as db and calls it directly (book_detail, borrower_detail, create_borrower, settings, time_travel, init_prompt, home, book_search, borrower_search).The UI depends on the Database (SQLite).
 
 Single Responsibility violated: init.py re-exports everything with import*, so the UI depends on function names, renaming or changing any breaks the UI.
 For example: db.create_loan(isbn, id), db.checkin(loan.id), db.checkin_many( ), db.pay_fines( ) db.create_borrower and db.search_books( ). Any rename change breaks the screens and modals.
