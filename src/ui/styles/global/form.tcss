@@ -1,0 +1,55 @@
+.form-content {
+    height: auto;
+    width: 100%;
+}
+
+.input-field {
+    height: auto;
+    margin-bottom: 1;
+}
+
+.input-field > Label {
+    color: $text;
+    margin-bottom: 1;
+}
+
+.input-field Input {
+    width: 100%;
+}
+
+.form-buttons {
+    width: 100%;
+    height: 3;
+    margin-top: 1;
+}
+
+.form-buttons Button {
+    width: 1fr;
+    margin: 0 1;
+}
+
+.form-content .detail-line {
+    margin: 1 0;
+    height: auto;
+}
+
+.form-content DataTable {
+    height: 10;
+}
+
+.form-content Vertical {
+    height: auto;
+}
+
+.side-by-side {
+    width: 100%;
+    height: auto;
+}
+
+.side-by-side > Input {
+    width: 1fr;
+}
+
+.side-by-side > Button {
+    width: auto;
+}

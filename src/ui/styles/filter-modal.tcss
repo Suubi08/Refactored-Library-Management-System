@@ -1,0 +1,12 @@
+FilterModal .filter-row {
+    width: 100%;
+    height: auto;
+    align: center middle;
+    margin-top: 1;
+}
+
+FilterModal .filter-row Label {
+    width: 30%;
+    align: center middle;
+    margin: 0 2;
+}

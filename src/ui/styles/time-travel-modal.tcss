@@ -1,0 +1,17 @@
+TimeTravelModal .date-selector {
+    width: 100%;
+    height: 3;
+    align: center middle;
+    margin: 1 0;
+}
+
+TimeTravelModal .date-display {
+    width: 30;
+    text-align: center;
+    padding: 0 2;
+}
+
+TimeTravelModal .arrow-btn {
+    width: 5;
+    min-width: 5;
+}

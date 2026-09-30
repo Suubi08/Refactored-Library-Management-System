@@ -1,0 +1,20 @@
+ModalScreen {
+    align: center middle;
+}
+
+#modal-container {
+    width: 60;
+    height: auto;
+    max-height: 80%;
+    border: thick $primary;
+    background: $surface;
+    padding: 1 2;
+}
+
+#modal-title {
+    width: 100%;
+    text-align: center;
+    text-style: bold;
+    color: $text;
+    margin-bottom: 1;
+}

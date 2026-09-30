@@ -1,0 +1,15 @@
+Tag {
+    width: auto;
+    height: auto;
+    padding: 0 1;
+    margin: 0 1;
+    background: $boost;
+    border: solid $primary;
+    color: $text;
+}
+
+Tag:hover {
+    background: $primary;
+    color: $text;
+    text-style: bold;
+}

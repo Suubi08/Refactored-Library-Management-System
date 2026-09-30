@@ -1,0 +1,24 @@
+SearchScreen {
+    layout: vertical;
+}
+
+SearchScreen .content {
+    width: 100%;
+    height: 1fr;
+    align: center middle;
+    padding: 2;
+}
+
+SearchScreen #result-count {
+    dock: bottom;
+    height: 1;
+    width: 100%;
+    background: $panel;
+    color: $text;
+    padding: 0 2;
+    text-align: center;
+}
+
+SearchScreen .content > DataTable {
+    height: 1fr
+}
