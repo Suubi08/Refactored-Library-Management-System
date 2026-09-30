@@ -1,3 +1,10 @@
 **/__pycache__
 
 *.db
+<<<<<<< HEAD
+=======
+
+.venv/
+__pycache__/
+*.pyc
+>>>>>>> 4ceeed32beff40fcf2cf85bdfea9058bac11d8e5
