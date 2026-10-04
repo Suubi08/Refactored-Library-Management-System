@@ -22,7 +22,7 @@ def test_is_overdue_raises_when_current_date_was_never_set(tmp_path, monkeypatch
     # create_loan() itself tolerates a missing current_date (falls back to
     # date.today() initially) -- so the loan is created successfully.
 
-    result = db.create_loan(borrower.id, isbn)
+    result = db.create_loan(isbn, borrower.id)
     assert result.status is True
 
     loan = db.get_loans_by_borrower_id(borrower.id)[0]
