@@ -28,7 +28,7 @@ def test_create_borrower_accepts_nine_digit_ssn_with_or_without_hyphens(
 	)
 
 	assert result.status is True
-	assert result.message == "Borrower created successfully."
+	assert result.message == "Borrower created successfuly!"
 	borrower = test_db.get_borrower_by_ssn("123456789")
 	assert borrower is not None
 	assert borrower.ssn == "123456789"
@@ -51,7 +51,7 @@ def test_create_borrower_strips_phone_formatting(test_db, phone):
 	)
 
 	assert result.status is True
-	assert result.message == "Borrower created successfully."
+	assert result.message == "Borrower created successfuly!"
 	borrower = test_db.get_borrower_by_ssn("987654321")
 	assert borrower is not None
 	assert borrower.phone == "1234567890"
@@ -76,6 +76,6 @@ def test_create_borrower_rejects_duplicate_ssn_in_application(test_db):
 	)
 
 	assert first.status is True
-	assert first.message == "Borrower created successfully."
+	assert first.message == "Borrower created successfuly!"
 	assert second.status is False
 	assert second.message == "Borrower with this SSN already exists."

@@ -160,3 +160,50 @@ def test_set_current_date_then_get_current_date_roundtrips(db_path):
 
     assert db.set_current_date(date(2025, 6, 15)) is True
     assert db.get_current_date() == date(2025, 6, 15)
+
+def test_get_author_by_id_is_unused_dead_code_with_a_wrong_return_type(db_path):
+    """
+    REAL BUG, verified --not a test mistake.
+
+    get_author_by_id() is annotated `-> Optional[Author]`, matching the
+    pattern every get_*_by_* function in this codebase follows
+    (parse the DB row into the matching Pydantic model). But unlike those,
+    it returns query.get_one_or_none()'s result directly, which is a raw
+    sqlite3.Row -- never wrapped in Author(...). So found.name raises
+    AttributeError; only dict-style access (found["name"]) works.
+
+    This had 0% test coverage before this test, and a repo-wide search confirms get_author_by_id()
+    is not called anywhere in the codebase -- it's dead code today, which
+    is why this type mismatch was never caught. In the next phase,
+    we either delete it, or fix it to return the Optional[Author]
+    contract it already declares.
+    """
+    db.init(str(db_path))
+    conn = sqlite3.connect(str(db_path))
+    row = conn.execute("SELECT Author_id, Name FROM AUTHORS LIMIT 1").fetchone()
+    conn.close()
+    author_id, name = row
+
+    found = db.get_author_by_id(author_id)
+
+    assert found is not None
+    assert not hasattr(found, "name"), (
+        "if this now fails, get_author_by_id() has been fixed to return"
+        "a real Author -- update this test to assert found.name == name"
+    )
+    assert found["name"] == name
+
+def test_get_author_by_id_returns_none_for_unknown_id(db_path):
+    db.init(str(db_path))
+    assert db.get_author_by_id(999999) is None
+ 
+ 
+def test_reset_time_sets_current_date_to_today_and_runs_fine_update(db_path):
+    from datetime import date
+    db.init(str(db_path))
+    db.set_current_date(date(2020, 1, 1))  # force a stale date first
+ 
+    assert db.reset_time() is True
+    assert db.get_current_date() == date.today()
+    assert db.get_fines_last_updated() == date.today()
+ 
