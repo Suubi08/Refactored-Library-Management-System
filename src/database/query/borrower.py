@@ -13,8 +13,6 @@ from models.result import OperationResult
 
 from . import query
 
-from logger import Logger
-
 def search_borrowers(search_term: str) -> list[BorrowerSearchResult]:
     if not search_term:
         return []
@@ -71,6 +69,7 @@ def _get_borrower(column: str, param: str) -> Optional[Borrower]:
         b.Bname,
         b.Address,
         b.Phone
+
     FROM {BORROWERS_TABLE_NAME} b
     WHERE {column} = ?
     """
@@ -83,16 +82,20 @@ def _get_borrower(column: str, param: str) -> Optional[Borrower]:
     return Borrower(**dict(result))
 
 def create_borrower(name: str, ssn: str, address: str, phone: str) -> OperationResult:
-    if not (name and ssn and address and phone):
-        missing_fields = []
-        if not name: missing_fields.append("Name")
-        if not ssn: missing_fields.append("SSN")
-        if not address: missing_fields.append("Address")
-        if not phone: missing_fields.append("Phone")
+    required_fields = {
+        "Name": name,
+        "SSN": ssn,
+        "Address": address,
+        "Phone": phone,
+    }
+    missing_fields = [
+        label for label, value in required_fields.items() if not value.strip()
+    ]
 
+    if missing_fields:
         return OperationResult(
             status=False,
-            message=f"Missing field(s): {', '.join(missing_fields)}"
+            message=f"Missing field(s): {', '.join(missing_fields)}",
         )
 
     ssn = ssn.replace('-', '')
@@ -100,7 +103,7 @@ def create_borrower(name: str, ssn: str, address: str, phone: str) -> OperationR
     if not ssn.isnumeric() or len(ssn) != 9:
         return OperationResult(
             status=False,
-            message="Not a valid SSN."
+            message="Not a valid SSN.",
         )
 
     phone = phone.replace('(', '').replace(')', '').replace('-','').replace(' ', '')
@@ -108,7 +111,7 @@ def create_borrower(name: str, ssn: str, address: str, phone: str) -> OperationR
     if not phone.isnumeric() or len(phone) != 10:
         return OperationResult(
             status=False,
-            message="Not a valid Phone Number."
+            message="Not a valid Phone Number.",
         )
 
     borrower = db.get_borrower_by_ssn(ssn)
@@ -116,7 +119,7 @@ def create_borrower(name: str, ssn: str, address: str, phone: str) -> OperationR
     if borrower:
         return OperationResult(
             status=False,
-            message="Borrower with this SSN already exists."
+            message="Borrower with this SSN already exists.",
         )
 
     sql = f"""
@@ -130,7 +133,8 @@ def create_borrower(name: str, ssn: str, address: str, phone: str) -> OperationR
 
     params = [name, ssn, address, phone]
 
+    success = query.try_execute_one(sql, params)
     return OperationResult(
-        status=query.try_execute_one(sql, params),
-        message="Borrower created successfuly!"
+        status=success,
+        message="Borrower created successfully." if success else "Could not create borrower.",
     )
