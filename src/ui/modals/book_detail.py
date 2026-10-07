@@ -11,6 +11,9 @@ from ui.components import Tag
 import database as db
 
 from ui.custom import BaseModal
+from composition_root import build_checkout_book
+
+
 
 class BookDetailModal(BaseModal):
 
@@ -109,7 +112,9 @@ class BookDetailModal(BaseModal):
             input = self.query_one(Input)
 
             try:
-                result = db.create_loan(self.book_data.isbn, int(input.value))
+                #result = db.create_loan(self.book_data.isbn, int(input.value))
+                result = build_checkout_book().execute(isbn, borrower_id, db.get_current_date())
+                
             except ValueError:
                 self.notify("You must provide a number.", severity="error")
                 return
