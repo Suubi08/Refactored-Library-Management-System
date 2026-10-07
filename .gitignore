@@ -5,3 +5,7 @@
 .venv/
 __pycache__/
 *.pyc
+ feature/domain-entities-fine-calculator
+
+.coverage
+main
