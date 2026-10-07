@@ -7,7 +7,7 @@ import database as db
 
 from app import app
 
-project_root = Path(__file__)
+project_root = Path(__file__).parent
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the Library Management System.")
