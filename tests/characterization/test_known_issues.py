@@ -28,17 +28,13 @@ def test_is_overdue_raises_when_current_date_was_never_set(tmp_path, monkeypatch
     loan = db.get_loans_by_borrower_id(borrower.id)[0]
 
     with pytest.raises(TypeError):
-        _ = loan.is_overdue()  # this is the bug: it raises TypeError because current_date is None
+        _ = loan.is_overdue  # This raises TypeError because current_date is None.
 
-def test_create_borrower_success_message_has_a_typo(test_db):
+def test_create_borrower_success_message_is_correct(test_db):
     """
-    REAL BUG, verified  --not a test mistake.
-    
-    database/query/borrower.py line 135 returns:
-        message="Borrower created successfully!"
-    instead of "Borrower created successfully." This is a simple fix 
-    for the next phase, not a behavioural one"""
+    Successful borrower creation returns a correctly spelled success message.
+    """
 
     result = test_db.create_borrower("Typo Check", "111223333", "1 st", "1234567890")
     assert result.status is True
-    assert result.message == "Borrower created successfuly!"
+    assert result.message == "Borrower created successfully."
