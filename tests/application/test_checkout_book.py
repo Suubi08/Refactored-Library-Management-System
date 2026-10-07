@@ -18,7 +18,7 @@ from application.use_cases.checkout_book import CheckoutBook
 from domain.entities.book import Book
 from domain.entities.borrower import Borrower
 from domain.entities.loan import Loan
-from fakes import (
+from fake import (
     FakeBookRepository,
     FakeBorrowerRepository,
     FakeFineRepository,
