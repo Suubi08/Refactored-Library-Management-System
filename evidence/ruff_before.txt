@@ -1,0 +1,18 @@
+35	I001   	[*] unsorted-imports
+31	UP045  	[*] non-pep604-annotation-optional
+16	F401   	[-] unused-import
+11	F541   	[*] f-string-missing-placeholders
+10	SIM117 	[-] multiple-with-statements
+ 5	RUF059 	[ ] unused-unpacked-variable
+ 5	F841   	[-] unused-variable
+ 4	PLR1722	[ ] sys-exit-alias
+ 2	RUF012 	[ ] mutable-class-default
+ 2	UP046  	[ ] non-pep695-generic-class
+ 1	SIM102 	[ ] collapsible-if
+ 1	UP035  	[*] deprecated-import
+ 1	PLR1730	[*] if-stmt-min-max
+ 1	EXE001 	[ ] shebang-not-executable
+ 1	C408   	[ ] unnecessary-collection-call
+ 1	RET501 	[*] unnecessary-return-none
+Found 127 errors.
+[*] 83 fixable with `--fix` (17 unsafe fixes available with `--fix --unsafe-fixes`).

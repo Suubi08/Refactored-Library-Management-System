@@ -1,0 +1,107 @@
+============================================================
+1. PACKAGE-LEVEL DEPENDENCIES  (A -> B means A imports B)
+============================================================
+app        -> database   (1 file)
+              app.py
+app        -> ui         (1 file)
+              app.py
+application -> domain     (3 files)
+              application/ports/book_repository.py
+              application/ports/borrower_repository.py
+              application/ports/loan_repository.py
+application -> models     (1 file)
+              application/use_cases/checkout_book.py
+composition_root -> application (1 file)
+              composition_root.py
+composition_root -> infrastructure (1 file)
+              composition_root.py
+database   -> domain     (1 file)
+              database/query/fine.py
+database   -> models     (5 files)
+              database/query/author.py
+              database/query/book.py
+              database/query/borrower.py
+              database/query/fine.py
+              database/query/loan.py
+infrastructure -> database   (4 files)
+              infrastructure/sqlite/book_repository.py
+              infrastructure/sqlite/borrower_repository.py
+              infrastructure/sqlite/fine_repository.py
+              infrastructure/sqlite/loan_repository.py
+infrastructure -> domain     (3 files)
+              infrastructure/sqlite/book_repository.py
+              infrastructure/sqlite/borrower_repository.py
+              infrastructure/sqlite/loan_repository.py
+main       -> app        (1 file)
+              main.py
+main       -> database   (1 file)
+              main.py
+models     -> database   (1 file)
+              models/dtypes.py
+ui         -> composition_root (1 file)
+              ui/modals/book_detail.py
+ui         -> database   (9 files)
+ui         -> models     (4 files)
+              ui/modals/book_detail.py
+              ui/modals/borrower_detail.py
+              ui/screens/book_search.py
+              ui/screens/borrower_search.py
+
+============================================================
+2. CYCLES (mutual dependencies between packages)
+============================================================
+CYCLE: database <-> models
+   database -> models via: ['database/query/author.py', 'database/query/book.py', 'database/query/borrower.py', 'database/query/fine.py', 'database/query/loan.py']
+   models -> database via: ['models/dtypes.py']
+
+============================================================
+3. UI -> DATABASE DIRECT CALLS  (file:line  function)
+============================================================
+ui/modals/book_detail.py:27   db.get_borrower_by_id
+ui/modals/book_detail.py:74   db.get_loans_by_borrower_id
+ui/modals/book_detail.py:99   db.get_loans_by_isbn
+ui/modals/book_detail.py:120  db.get_current_date
+ui/modals/book_detail.py:136  db.get_loans_by_borrower_id
+ui/modals/book_detail.py:139  db.checkin
+ui/modals/borrower_detail.py:18   db.get_borrower_by_id
+ui/modals/borrower_detail.py:24   db.get_loans_by_borrower_id
+ui/modals/borrower_detail.py:25   db.get_loans_by_borrower_id
+ui/modals/borrower_detail.py:27   db.get_fines_by_borrower_id
+ui/modals/borrower_detail.py:28   db.get_total_fines_by_borrower_id
+ui/modals/borrower_detail.py:51   db.get_current_date
+ui/modals/borrower_detail.py:123  db.checkin_many
+ui/modals/borrower_detail.py:135  db.pay_fines
+ui/modals/create_borrower.py:44   db.create_borrower
+ui/modals/init_prompt.py:27   db.exists
+ui/modals/init_prompt.py:30   db.init
+ui/modals/settings.py:61   db.exists
+ui/modals/settings.py:64   db.init
+ui/modals/settings.py:76   db.delete
+ui/modals/settings.py:77   db.init
+ui/modals/settings.py:89   db.reset_time
+ui/modals/settings.py:98   db.load_additional_test_data
+ui/modals/settings.py:107  db.exists
+ui/modals/settings.py:107  db.is_initialized
+ui/modals/time_travel.py:59   db.set_current_date
+ui/modals/time_travel.py:61   db.update_fines
+ui/screens/book_search.py:16   db.search_books
+ui/screens/borrower_search.py:16   db.search_borrowers
+ui/screens/home.py:31   db.is_initialized
+ui/screens/home.py:32   db.is_initialized
+ui/screens/home.py:33   db.is_initialized
+ui/screens/home.py:40   db.is_initialized
+ui/screens/home.py:47   db.get_current_date
+ui/screens/home.py:57   db.is_initialized
+
+Calls per file:
+    8  ui/modals/borrower_detail.py
+    8  ui/modals/settings.py
+    6  ui/modals/book_detail.py
+    6  ui/screens/home.py
+    2  ui/modals/init_prompt.py
+    2  ui/modals/time_travel.py
+    1  ui/modals/create_borrower.py
+    1  ui/screens/book_search.py
+    1  ui/screens/borrower_search.py
+  ---
+   35  total direct UI->db calls

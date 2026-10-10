@@ -1,0 +1,56 @@
+........................................................................ [ 48%]
+........................................................................ [ 97%]
+....                                                                     [100%]
+=============================== warnings summary ===============================
+src/models/result.py:7
+  /home/sbk/library-management-system/src/models/result.py:7: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class OperationResult(BaseModel, Generic[T]):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.3-final-0 ________________
+
+Name                                               Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------------------
+src/app.py                                            19     19     0%   1-40
+src/application/__init__.py                            0      0   100%
+src/application/ports/__init__.py                      0      0   100%
+src/application/ports/book_repository.py               4      0   100%
+src/application/ports/borrower_repository.py           4      0   100%
+src/application/ports/fine_repository.py               3      0   100%
+src/application/ports/loan_repository.py               7      0   100%
+src/application/use_cases/__init__.py                  0      0   100%
+src/application/use_cases/checkout_book.py            31      0   100%
+src/composition_root.py                                7      0   100%
+src/database/__init__.py                               9      0   100%
+src/database/config.py                                 5      0   100%
+src/database/dtypes.py                                 2      0   100%
+src/database/import_data.py                          104     45    57%   14, 40-41, 83-84, 95-174
+src/database/initialize.py                            69      5    93%   24, 29, 76-79
+src/database/names.py                                  7      0   100%
+src/database/query/author.py                           7      0   100%
+src/database/query/book.py                            43      2    95%   88, 102
+src/database/query/borrower.py                        45      2    96%   18, 51
+src/database/query/conf.py                            21      0   100%
+src/database/query/fine.py                            83      3    96%   40, 94, 176
+src/database/query/loan.py                            90      1    99%   123
+src/database/query/metadata.py                        13      0   100%
+src/database/query/query.py                           60     14    77%   9, 18-21, 29, 38-41, 74-77
+src/database/schema.py                                 2      0   100%
+src/domain/entities/book.py                            5      0   100%
+src/domain/entities/borrower.py                       23      0   100%
+src/domain/entities/loan.py                           19      3    84%   49-52
+src/domain/services/fine_calculator.py                 2      0   100%
+src/infrastructure/__init__.py                         0      0   100%
+src/infrastructure/sqlite/__init__.py                  0      0   100%
+src/infrastructure/sqlite/book_repository.py           9      0   100%
+src/infrastructure/sqlite/borrower_repository.py       9      0   100%
+src/infrastructure/sqlite/fine_repository.py           4      0   100%
+src/infrastructure/sqlite/loan_repository.py          27      1    96%   38
+src/main.py                                           51     51     0%   3-72
+src/models/__init__.py                                 2      0   100%
+src/models/dtypes.py                                  37      0   100%
+src/models/result.py                                  64      8    88%   38, 42, 46, 50, 61, 65, 79, 83
+--------------------------------------------------------------------------------
+TOTAL                                                887    154    83%
+148 passed, 1 warning in 166.97s (0:02:46)
