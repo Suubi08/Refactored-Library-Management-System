@@ -7,6 +7,7 @@ from textual.widgets import Label, Button, TabbedContent, TabPane, DataTable, St
 from models.result import BookSearchResult
 
 from ui.components import Tag
+from datetime import date
 
 import database as db
 
@@ -114,11 +115,14 @@ class BookDetailModal(BaseModal):
             try:
                 borrower_id = int(input.value)
                 result = build_checkout_book().execute(
-                    self.book_data.isbn, borrower_id, db.get_current_date()
+                    self.book_data.isbn,
+                    borrower_id,
+                    db.get_current_date() or date.today(),
                 )
             except ValueError:
                 self.notify("You must provide a number.", severity="error")
                 return
+
             if result.status:
                 self.notify(result.message, severity="information")
                 self.dismiss()
