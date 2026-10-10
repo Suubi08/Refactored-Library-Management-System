@@ -85,5 +85,17 @@ Before Phase 3 123 78%
 After Phase 3 (pending) no files added
 
 
+## Phase 4
+File	Comment
+src/database/query/loan.py:125	The old function. create_loan(isbn, borrower_id) -> OperationResult.
+src/application/ports/loan_repository.py:28	The interface (port). It declares that any loan repository must offer create_loan(isbn, borrower_id, title, date_out, due_date) -> Loan. It only declares it and contains no logic.
+src/infrastructure/sqlite/loan_repository.py:35	Interface implementation. It does the real SQLite work for that interface method and returns a Loan.
+
+Button  ->  CheckoutBook.execute()  ->  loan_repository.create_loan(...)  ->  SQLite
+rules: limit, fines, availability, due date
+Interface: port, SqliteLoanRepository
+
+Before the refactor, the create_loan called database/query/loan.py  directly, and that on function did the rule checks and the insert together. 
+Now CheckoutBook does the rule checks and the repository only does the insert 
 
 			
