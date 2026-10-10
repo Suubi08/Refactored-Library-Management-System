@@ -112,13 +112,13 @@ class BookDetailModal(BaseModal):
             input = self.query_one(Input)
 
             try:
-                #result = db.create_loan(self.book_data.isbn, int(input.value))
-                result = build_checkout_book().execute(isbn, borrower_id, db.get_current_date())
-                
+                borrower_id = int(input.value)
+                result = build_checkout_book().execute(
+                    self.book_data.isbn, borrower_id, db.get_current_date()
+                )
             except ValueError:
                 self.notify("You must provide a number.", severity="error")
                 return
-
             if result.status:
                 self.notify(result.message, severity="information")
                 self.dismiss()
