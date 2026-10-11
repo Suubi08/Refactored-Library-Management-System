@@ -4,7 +4,7 @@ A terminal library-management application (books, borrowers, loans, fines) built
 
 - Repository: https://github.com/Suubi08/Refactored-Library-Management-System
 - Baseline commit: 17c0b7c
-- Final commit: `<FINAL_COMMIT>`
+- Final commit: 2e83a70
 - Group members: SUUBI BAKER KANE 24/U/26049/EVE
                  NABAGGALA MARION 24/U/24336/PS
                  NANSWA PATRICIA  24/U/27188/EVE
