@@ -25,7 +25,6 @@ def _read_borrowers() -> Optional[StringMatrix]:
     try:
         with open('data/borrower.csv', 'r', encoding='utf-8') as file:
             rows = list(csv.reader(file))
-            header = rows[0]
 
             for row in rows[1:]:
                 row = [html.unescape(field) for field in row]
@@ -50,7 +49,6 @@ def _read_books() -> Optional[tuple[StringMatrix, StringMatrix, StringMatrix]]:
     try:
         with open('data/book.csv', 'r', encoding='utf-8') as file:
             rows = list(csv.reader(file, delimiter='\t'))
-            header = rows[0]
 
             author_id_incr = 0
             author_set = dict()
